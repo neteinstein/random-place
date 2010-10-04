@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Main!</string>
-    <string name="app_name">Random Place</string>
+	<string name="app_name">Random Place</string>
+	<string name="button_random">Give me a Random Place!</string>
+	<string name="toggle_button_near_on">Near Places</string>
+	<string name="toggle_button_near_off">Added Places</string>
+	
+	
+	<string name="add">Add a new place!</string>
+	<string name="add_place_name">Name:</string>
+	<string name="add_place_weight">Weight:</string>
+	
+	<string name="button_add">Save</string>
 </resources>
