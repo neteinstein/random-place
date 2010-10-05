@@ -1,3 +1,11 @@
+/*
+ * Copyleft (c) Einstein's Team
+ * 
+ * Code licensed under GPL v3.0 license. 
+ * 
+ * Pedro Vicente - neteinstein @ 2010/10/01
+ */
+
 package org.einstein.random;
 
 import org.einstein.random.R;
@@ -18,8 +26,8 @@ public class Main extends TabActivity {
 
         mTabHost.addTab(mTabHost.newTabSpec("random").setIndicator("Random").setContent(
                 new Intent(Main.this, Random.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("add").setIndicator("Add New Place").setContent(
-                new Intent(Main.this, Add.class)));
+        mTabHost.addTab(mTabHost.newTabSpec("places").setIndicator("Places Added").setContent(
+                new Intent(Main.this, Places.class)));
 
         mTabHost.setCurrentTab(0);
         

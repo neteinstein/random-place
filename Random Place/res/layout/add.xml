@@ -9,31 +9,26 @@
 		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_width="fill_parent" android:layout_height="wrap_content">
 			
-			<TextView android:id="@+id/add" android:text="@string/add"
-				android:textSize="20sp" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" android:gravity="center_horizontal"
-				android:padding="10px" />
-
-			<TextView android:id="@+id/placeName" android:text="@string/add_place_name"
+			<TextView android:id="@+id/placeName" android:text="@string/text_add_place_name"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:layout_below="@id/add" android:gravity="left" />
+				android:gravity="left" />
 
 			<EditText android:id="@+id/txtPlaceName"
 				android:layout_below="@id/placeName" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" />
+				android:layout_height="wrap_content"/>
 
-			<TextView android:id="@+id/placeWeight" android:text="@string/add_place_weight"
+			<TextView android:id="@+id/placeWeight" android:text="@string/text_add_place_weight"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:layout_below="@id/txtPlaceName" android:gravity="left"
-				android:paddingTop="15px" />
+				android:gravity="left" android:paddingTop="15px" 
+				android:layout_below="@id/txtPlaceName"/>
 
 			<EditText android:id="@+id/txtPlaceWeight"
-				android:layout_below="@id/placeName" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" android:password="true" />
+				android:layout_width="fill_parent"	android:layout_height="wrap_content" 
+				android:layout_below="@id/placeWeight"/>
 
 
-			<Button android:id="@+id/buttonAdd" android:paddingBottom="10px"
-				android:text="@string/button_add" android:gravity="center"
+			<Button android:id="@+id/buttonAddPlace" android:paddingBottom="10px"
+				android:text="@string/button_add_place" android:gravity="center"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:layout_below="@id/txtPlaceWeight"/>
 		</RelativeLayout>

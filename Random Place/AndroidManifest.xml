@@ -13,7 +13,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".Add">
+        <activity android:name=".Places">
 		</activity>
 		<activity android:name=".Random">
 		</activity>
