@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Random Place</string>
-	<string name="button_random">Give me a Random Place!</string>
-	<string name="toggle_button_near_on">Near Places</string>
-	<string name="toggle_button_near_off">Added Places</string>
+	<string name="button_random">Random Place!</string>
+	
+	<string name="info">Information</string>
+	<string name="ok">Ok</string>
+	<string name="error">Error</string>
+	<string name="please_wait">Please wait...</string>
+	<string name="loading_data">Loading data...</string>
+	<string name="storing_data">Storing data...</string>
+	<string name="refresh">Refresh</string>
+	
+	<string name="toggle_button_on">ON</string>
+	<string name="toggle_button_off">OFF</string>
+	<string name="toggle_button_near_on">Using Random Near Places</string>
+	<string name="toggle_button_near_off">Using Random Added Places</string>
+	
+	<string name="text_add_place">Add a new place!</string>
+	<string name="text_add_place_name">Name:</string>
+	<string name="text_add_place_weight">Weight:</string>
+	
+	<string name="button_add_place">Add Place</string>
 	
 	
-	<string name="add">Add a new place!</string>
-	<string name="add_place_name">Name:</string>
-	<string name="add_place_weight">Weight:</string>
-	
-	<string name="button_add">Save</string>
+	<string name="places_team">Pedro Vicente</string>
+
 </resources>

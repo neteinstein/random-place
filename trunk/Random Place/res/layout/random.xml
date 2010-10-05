@@ -4,17 +4,28 @@
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
 
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		android:layout_width="fill_parent" android:layout_height="wrap_content" 
+		android:gravity="center_vertical|center_horizontal">
 
-		<Button android:id="@+id/buttonRandom" android:text="@string/button_random" 
-			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:gravity="center" />
+		<ImageView
+	        android:id="@+id/imagePlace"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:src="@drawable/icon" />
 
 		<ToggleButton android:id="@+id/buttomNear"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_alignParentRight="true" android:layout_gravity="center"
-			android:paddingRight="5dip" android:textOn="@string/toggle_button_near_on"
-			android:textOff="@string/toggle_button_near_off" />
+			android:textOn="@string/toggle_button_near_on"
+			android:textOff="@string/toggle_button_near_off" 
+			android:layout_centerHorizontal="true"
+			android:layout_below="@id/imagePlace" />
+
+		<Button android:id="@+id/buttonRandom" android:text="@string/button_random" 
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:gravity="center" android:layout_below="@id/buttomNear" 
+			android:paddingTop="15dip"/>
+
 	</RelativeLayout>
 
 </LinearLayout>
