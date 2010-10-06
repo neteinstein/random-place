@@ -50,25 +50,20 @@ public class Places extends ListActivity {
 	private Vector<Place> getPlaces() {
 
 		Vector<Place> places = new Vector<Place>();
-		
+
 		/*
 		 * Start Demo Code
 		 * 
-		 * In this place it should access memory 
-		 * and retrieve the places stored
+		 * In this place it should access memory and retrieve the places stored
 		 */
 		Place demo = new Place();
 		demo.setName("Forum");
 		demo.setWeight(10);
-		
-		//For the add layout...
-		places.add(null);
-		
+
 		places.add(demo);
-		
+
 		/*
 		 * End Demo Code
-		 * 
 		 */
 
 		return places;
@@ -190,17 +185,12 @@ public class Places extends ListActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 
-			if (position != 0) {
-				convertView = mInflater.inflate(R.layout.place, parent, false);
-			} else {
+			if (position == 0) {
 				convertView = mInflater.inflate(R.layout.add, parent, false);
-			}
-
-			if (position != 0) {
-				convertView = fillLayoutWithPlace(position, convertView);
-			} else {
 				convertView = fillLayoutWithAddLayout(position, convertView);
 			}
+			convertView = mInflater.inflate(R.layout.place, parent, false);
+			convertView = fillLayoutWithPlace(position, convertView);
 
 			return convertView;
 		}
@@ -224,7 +214,7 @@ public class Places extends ListActivity {
 					.findViewById(R.id.txtPlaceWeight);
 
 			placeName.setText(place.getName());
-			
+
 			placeWeight.setText(place.getWeightString());
 
 			return convertView;
@@ -242,10 +232,11 @@ public class Places extends ListActivity {
 		private View fillLayoutWithAddLayout(int position,
 				final View convertView) {
 
-			final Button addPlace = (Button) convertView.findViewById(R.id.buttonAddPlace);
-			//final EditText placeName = (EditText) convertView
-			//			.findViewById(R.id.placeName);
-			
+			final Button addPlace = (Button) convertView
+					.findViewById(R.id.buttonAddPlace);
+			// final EditText placeName = (EditText) convertView
+			// .findViewById(R.id.placeName);
+
 			addPlace.setText(res.getString(R.string.button_add_place));
 
 			return convertView;
