@@ -57,6 +57,9 @@ public class Places extends ListActivity {
 		 * In this place it should access memory and retrieve the places stored
 		 */
 		Place demo = new Place();
+		
+		places.add(null);
+		
 		demo.setName("Forum");
 		demo.setWeight(10);
 
@@ -189,8 +192,10 @@ public class Places extends ListActivity {
 				convertView = mInflater.inflate(R.layout.add, parent, false);
 				convertView = fillLayoutWithAddLayout(position, convertView);
 			}
+			else{
 			convertView = mInflater.inflate(R.layout.place, parent, false);
 			convertView = fillLayoutWithPlace(position, convertView);
+			}
 
 			return convertView;
 		}
