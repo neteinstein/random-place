@@ -39,7 +39,7 @@ public class Places extends ListActivity {
 
 	/** The my alert dialog. */
 	private AlertDialog myAlertDialog = null;
-	
+
 	private DatabaseQuery db = null;
 
 	protected void onStart() {
@@ -54,7 +54,7 @@ public class Places extends ListActivity {
 	private ArrayList<Place> getPlaces() {
 
 		ArrayList<Place> places = new ArrayList<Place>();
-		
+
 		this.db = ((ApplicationRandom) getApplication()).getDatabase();
 
 		/*
@@ -62,39 +62,45 @@ public class Places extends ListActivity {
 		 * 
 		 * In this place it should access  and retrieve the places stored
 		 */
-		
+
 		//TODO: SELECT DATA FROM PLACS AND ADD TO ARRAYLIST
-		
+
 		this.db.appendData("PLACE_NAME", "FORUM");
-		this.db.appendData("PLACE_WEIGHT", "1");
+		this.db.appendData("PLACE_WEIGHT", "9");
 		this.db.addRow();
-		
+		this.db.appendData("PLACE_NAME", "CONTI");
+		this.db.appendData("PLACE_WEIGHT", "5");
+		this.db.addRow();
+		this.db.appendData("PLACE_NAME", "DV");
+		this.db.appendData("PLACE_WEIGHT", "7");
+		this.db.addRow();
+
 		Place demo = new Place();
-		
+
 		places.add(null);
 		try{
-		places.addAll(this.db.getData(new String[] {"PLACE_NAME", "PLACE_WEIGHT"}, null, null, null, null, "PLACE_NAME", "DESC"));
+			places.addAll(this.db.getData(new String[] {"PLACE_NAME", "PLACE_WEIGHT"}, null, null, null, null, "PLACE_NAME", "DESC"));
+			
 		}catch(Exception e){
 
-		Log.e("SQLite", "SQL Error:" , e);
-			
-		demo.setName("Forum");
-		demo.setWeight(10);
-		
-		places.add(demo);
-		
-		demo = new Place();
-		demo.setName("DV");
-		demo.setWeight(8);
+			Log.e("SQLite", "SQL Error:" , e);
 
-		places.add(demo);
-		
+			demo.setName("Forum");
+			demo.setWeight(10);
+
+			places.add(demo);
+
+			demo = new Place();
+			demo.setName("DV");
+			demo.setWeight(8);
+
+			places.add(demo);
+
 		}
 
 		/*
 		 * End Demo Code
 		 */
-
 		return places;
 	}
 
@@ -240,9 +246,9 @@ public class Places extends ListActivity {
 			final Place place = (Place) this.getItem(position);
 
 			final TextView placeName = (TextView) convertView
-					.findViewById(R.id.placeName);
+			.findViewById(R.id.placeName);
 			final EditText placeWeight = (EditText) convertView
-					.findViewById(R.id.txtPlaceWeight);
+			.findViewById(R.id.txtPlaceWeight);
 
 			placeName.setText(place.getName());
 
@@ -264,7 +270,7 @@ public class Places extends ListActivity {
 				final View convertView) {
 
 			final Button addPlace = (Button) convertView
-					.findViewById(R.id.buttonAddPlace);
+			.findViewById(R.id.buttonAddPlace);
 			// final EditText placeName = (EditText) convertView
 			// .findViewById(R.id.placeName);
 

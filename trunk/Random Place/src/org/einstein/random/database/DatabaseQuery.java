@@ -6,6 +6,7 @@ import org.einstein.random.entities.Place;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 //TODO This example needs to be adapted to this application
 
@@ -101,15 +102,22 @@ public class DatabaseQuery {
 
 		Cursor results = database.getAllEntries(keys, selection, selectionArgs,
 				groupBy, having, sortBy, sortOption);
-		while (results.moveToNext())
+
+		if (results != null) {
+			results.moveToFirst();
+		}
+
+		for(int i=0;i<results.getCount();i++){
+			// This should be get by column name and not index
 			place = new Place();
-
-		// This should be get by column name and not index
-		place.setName(results.getString(0));
-		place.setWeight(Integer.parseInt((results.getString(1))));
-
-		list.add(place);
-
+			place.setName(results.getString(0));
+			place.setWeight(Integer.parseInt((results.getString(1))));
+			list.add(place);
+			if (results != null) {
+				results.moveToNext();
+			}
+		}
+		results.close();
 		return list;
 	}
 
