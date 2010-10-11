@@ -18,6 +18,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,14 +65,31 @@ public class Places extends ListActivity {
 		
 		//TODO: SELECT DATA FROM PLACS AND ADD TO ARRAYLIST
 		
+		this.db.appendData("PLACE_NAME", "FORUM");
+		this.db.appendData("PLACE_WEIGHT", "1");
+		this.db.addRow();
+		
 		Place demo = new Place();
 		
 		places.add(null);
-		
+		try{
+		places.addAll(this.db.getData(new String[] {"PLACE_NAME", "PLACE_WEIGHT"}, null, null, null, null, "PLACE_NAME", "DESC"));
+		}catch(Exception e){
+
+		Log.e("SQLite", "SQL Error:" , e);
+			
 		demo.setName("Forum");
 		demo.setWeight(10);
+		
+		places.add(demo);
+		
+		demo = new Place();
+		demo.setName("DV");
+		demo.setWeight(8);
 
 		places.add(demo);
+		
+		}
 
 		/*
 		 * End Demo Code
