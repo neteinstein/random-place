@@ -1,88 +1,124 @@
 package org.einstein.random.database;
 
-
 import java.util.ArrayList;
+
+import org.einstein.random.entities.Place;
 
 import android.content.Context;
 import android.database.Cursor;
 
 //TODO This example needs to be adapted to this application
 
-
 public class DatabaseQuery {
 	// Variables area
 	private ArrayList<String> arrayKeys = null;
 	private ArrayList<String> arrayValues = null;
-	private ArrayList<String> databaseKeys = null;
-	private ArrayList<String> databaseKeyOptions = null;
+	private ArrayList<String> databaseColumns = null;
+	private ArrayList<String> databaseColumnsType = null;
 	private DBAdapter database;
-	
+
 	/**
 	 * Initialize the ArrayList
-	 * @param context Pass context from calling class.
+	 * 
+	 * @param context
+	 *            Pass context from calling class.
 	 */
 	public DatabaseQuery(Context context) {
 		// Create an ArrayList of keys and one of the options/parameters
 		// for the keys.
-		databaseKeys = new ArrayList<String>();
-		databaseKeyOptions = new ArrayList<String>();
-		databaseKeys.add("Title");
-		databaseKeyOptions.add("text not null");
-		
+		databaseColumns = new ArrayList<String>();
+		databaseColumnsType = new ArrayList<String>();
+		// Database columns
+		databaseColumns.add("PLACE_NAME");
+		databaseColumns.add("PLACE_WEIGHT");
+
+		// Database columns types
+		databaseColumnsType.add("text not null");
+		databaseColumnsType.add("integer");
+
 		// Call the database adapter to create the database
-		database = new DBAdapter(context, "places", databaseKeys, databaseKeyOptions);
-        database.open();
+		database = new DBAdapter(context, "places", databaseColumns,
+				databaseColumnsType);
+		database.open();
+
+		initializeArrays();
+	}
+
+	public void initializeArrays() {
 		arrayKeys = new ArrayList<String>();
 		arrayValues = new ArrayList<String>();
 
 	}
-	
+
 	/**
 	 * Append data to an ArrayList to then submit to the database
-	 * @param key Key of the value being appended to the Array.
-	 * @param value Value to be appended to Array.
+	 * 
+	 * @param key
+	 *            Key of the value being appended to the Array.
+	 * @param value
+	 *            Value to be appended to Array.
 	 */
-	public void appendData(String key, String value){
+	public void appendData(String key, String value) {
 		arrayKeys.add(key);
 		arrayValues.add(value);
 	}
-	
+
 	/**
-	 * This method adds the row created by appending data to the database.
-	 * The parameters constitute one row of data.
+	 * This method adds the row created by appending data to the database. The
+	 * parameters constitute one row of data.
 	 */
-	public void addRow(){
+	public void addRow() {
 		database.insertEntry(arrayKeys, arrayValues);
 	}
-	
+
 	/**
 	 * Get data from the table.
-	 * @param keys List of columns to include in the result.
-	 * @param selection Return rows with the following string only. Null returns all rows.
-	 * @param selectionArgs Arguments of the selection.
-	 * @param groupBy Group results by.
-	 * @param having A filter declare which row groups to include in the cursor.
-	 * @param sortBy Column to sort elements by.
-	 * @param sortOption ASC for ascending, DESC for descending.
-	 * @return Returns an ArrayList<String> with the results of the selected field.
+	 * 
+	 * @param keys
+	 *            List of columns to include in the result.
+	 * @param selection
+	 *            Return rows with the following string only. Null returns all
+	 *            rows.
+	 * @param selectionArgs
+	 *            Arguments of the selection.
+	 * @param groupBy
+	 *            Group results by.
+	 * @param having
+	 *            A filter declare which row groups to include in the cursor.
+	 * @param sortBy
+	 *            Column to sort elements by.
+	 * @param sortOption
+	 *            ASC for ascending, DESC for descending.
+	 * @return Returns an ArrayList<String> with the results of the selected
+	 *         field.
 	 */
-	public ArrayList<String> getData(String[] keys, String selection, String[] 
-	  selectionArgs, String groupBy, String having, String sortBy, String sortOption){
-		
-		ArrayList<String> list = new ArrayList<String>(); 
-		Cursor results = database.getAllEntries(keys, selection, 
-				selectionArgs, groupBy, having, sortBy, sortOption);
-		while(results.moveToNext())
-			list.add(results.getString(results.getColumnIndex(sortBy)));
-		return list;
+	public ArrayList<Place> getData(String[] keys, String selection,
+			String[] selectionArgs, String groupBy, String having,
+			String sortBy, String sortOption) {
 
+		ArrayList<Place> list = new ArrayList<Place>();
+		Place place = null;
+
+		Cursor results = database.getAllEntries(keys, selection, selectionArgs,
+				groupBy, having, sortBy, sortOption);
+		while (results.moveToNext())
+			place = new Place();
+
+		// This should be get by column name and not index
+		place.setName(results.getString(0));
+		place.setWeight(Integer.parseInt((results.getString(1))));
+
+		list.add(place);
+
+		return list;
 	}
-	
+
 	/**
 	 * Destroy the reporter.
+	 * 
 	 * @throws Throwable
 	 */
-	public void destroy() throws Throwable{
-        database.close();
+	public void destroy() throws Throwable {
+		database.close();
 	}
 }

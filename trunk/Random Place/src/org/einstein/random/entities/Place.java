@@ -11,7 +11,7 @@ package org.einstein.random.entities;
 public class Place {
 	
 	private String name = "";
-	private int weight = 0;
+	private int weight = 1;
 
 	public String getName() {
 		return name;
