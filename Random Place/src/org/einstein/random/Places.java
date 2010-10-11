@@ -8,8 +8,9 @@
 
 package org.einstein.random;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
+import org.einstein.random.database.DatabaseQuery;
 import org.einstein.random.entities.Place;
 
 import android.app.AlertDialog;
@@ -37,6 +38,8 @@ public class Places extends ListActivity {
 
 	/** The my alert dialog. */
 	private AlertDialog myAlertDialog = null;
+	
+	private DatabaseQuery db = null;
 
 	protected void onStart() {
 		super.onStart();
@@ -47,15 +50,20 @@ public class Places extends ListActivity {
 		setListAdapter(placeListAdapter);
 	}
 
-	private Vector<Place> getPlaces() {
+	private ArrayList<Place> getPlaces() {
 
-		Vector<Place> places = new Vector<Place>();
+		ArrayList<Place> places = new ArrayList<Place>();
+		
+		this.db = ((ApplicationRandom) getApplication()).getDatabase();
 
 		/*
 		 * Start Demo Code
 		 * 
-		 * In this place it should access memory and retrieve the places stored
+		 * In this place it should access  and retrieve the places stored
 		 */
+		
+		//TODO: SELECT DATA FROM PLACS AND ADD TO ARRAYLIST
+		
 		Place demo = new Place();
 		
 		places.add(null);
@@ -140,7 +148,7 @@ public class Places extends ListActivity {
 		 *            the full list
 		 */
 		public PlacesListAdapter(Context context, int resource, int resourceId,
-				Vector<Place> data) {
+				ArrayList<Place> data) {
 			super(context, resource, resourceId, data);
 			mInflater = LayoutInflater.from(context);
 			this.context = context;
@@ -193,8 +201,8 @@ public class Places extends ListActivity {
 				convertView = fillLayoutWithAddLayout(position, convertView);
 			}
 			else{
-			convertView = mInflater.inflate(R.layout.place, parent, false);
-			convertView = fillLayoutWithPlace(position, convertView);
+				convertView = mInflater.inflate(R.layout.place, parent, false);
+				convertView = fillLayoutWithPlace(position, convertView);
 			}
 
 			return convertView;
