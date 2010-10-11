@@ -8,7 +8,6 @@
 
 package org.einstein.random;
 
-import org.einstein.random.R;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ public class Main extends TabActivity {
         final TabHost mTabHost = getTabHost();
 
         mTabHost.addTab(mTabHost.newTabSpec("random").setIndicator("Random").setContent(
-                new Intent(Main.this, Random.class)));
+                new Intent(Main.this, RandomPlace.class)));
         mTabHost.addTab(mTabHost.newTabSpec("places").setIndicator("Places Added").setContent(
                 new Intent(Main.this, Places.class)));
 
