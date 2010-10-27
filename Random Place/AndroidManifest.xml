@@ -15,9 +15,7 @@
         
         <activity android:name=".Places">
 		</activity>
-		<activity android:name=".RandomPlace">
-		</activity>
-		<activity android:name=".RandomNear">
+		<activity android:name=".Random">
 		</activity>
 
     </application>

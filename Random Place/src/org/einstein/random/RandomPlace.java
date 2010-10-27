@@ -11,20 +11,11 @@ package org.einstein.random;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.einstein.random.database.DatabaseQuery;
 import org.einstein.random.entities.Place;
 
-import android.app.Activity;
-
-public class RandomPlace extends Activity{
-
-
-    protected void onStart() {
-        super.onStart();
-
-        setContentView(R.layout.random);
-    }
+public class RandomPlace {
 	
+	//Receives a list of places and selects a random place
 	public Place random(ArrayList<Place> places){
 		int totalWeight = 0;
         int i;
@@ -42,7 +33,5 @@ public class RandomPlace extends Activity{
         }
 
         return places.get(i);
-	}
-	
-	//Missing here the interactions with UI 
+	} 
 }
