@@ -13,8 +13,10 @@
 	
 	<string name="toggle_button_on">ON</string>
 	<string name="toggle_button_off">OFF</string>
-	<string name="toggle_button_near_on">Using Random Near Places</string>
-	<string name="toggle_button_near_off">Using Random Added Places</string>
+	<string name="toggle_button_near_on">Random &amp; Near</string>
+	<string name="toggle_button_near_off">Random Place</string>
+	<string name="toggle_button_tweet_on">Tweets the result!</string>
+	<string name="toggle_button_tweet_off">Don\'t share result</string>
 	
 	<string name="text_add_place">Add a new place!</string>
 	<string name="text_add_place_name">Name:</string>

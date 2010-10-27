@@ -14,16 +14,23 @@
 	        android:layout_centerHorizontal="true"
 	        android:src="@drawable/icon" />
 
-		<ToggleButton android:id="@+id/buttomNear"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<ToggleButton android:id="@+id/buttonNear"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:textOn="@string/toggle_button_near_on"
 			android:textOff="@string/toggle_button_near_off" 
 			android:layout_centerHorizontal="true"
-			android:layout_below="@id/imagePlace" />
+			android:layout_below="@id/imagePlace" android:layout_toLeftOf="@id/imagePlace"/>
+			
+		<ToggleButton android:id="@+id/buttonTweet"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textOn="@string/toggle_button_tweet_on"
+			android:textOff="@string/toggle_button_tweet_off" 
+			android:layout_centerHorizontal="true"
+			android:layout_below="@id/imagePlace" android:layout_toRightOf="@id/imagePlace" />
 
 		<Button android:id="@+id/buttonRandom" android:text="@string/button_random" 
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:gravity="center" android:layout_below="@id/buttomNear" 
+			android:gravity="center" android:layout_below="@id/buttonTweet" 
 			android:paddingTop="15dip"/>
 
 	</RelativeLayout>

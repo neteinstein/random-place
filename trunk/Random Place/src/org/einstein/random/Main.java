@@ -24,7 +24,7 @@ public class Main extends TabActivity {
         final TabHost mTabHost = getTabHost();
 
         mTabHost.addTab(mTabHost.newTabSpec("random").setIndicator("Random").setContent(
-                new Intent(Main.this, RandomPlace.class)));
+                new Intent(Main.this, Random.class)));
         mTabHost.addTab(mTabHost.newTabSpec("places").setIndicator("Places Added").setContent(
                 new Intent(Main.this, Places.class)));
 
