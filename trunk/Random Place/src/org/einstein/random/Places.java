@@ -10,7 +10,6 @@ package org.einstein.random;
 
 import java.util.ArrayList;
 
-import org.einstein.random.database.DatabaseQuery;
 import org.einstein.random.entities.Place;
 
 import android.app.AlertDialog;
@@ -18,12 +17,12 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,17 +39,22 @@ public class Places extends ListActivity {
 	/** The my alert dialog. */
 	private AlertDialog myAlertDialog = null;
 
-
-
 	protected void onStart() {
 		super.onStart();
 		this.res = getResources();
 
+		// TODO: Stupid code to be able to inflate a header on the list.
+		// This should be removed and done properly in the future.
+		ArrayList<Place> places = new ArrayList<Place>();
+		places.add(null);
+
+		places.addAll(((ApplicationRandom) getApplication())
+				.getPlaces());
+
 		PlacesListAdapter placeListAdapter = new PlacesListAdapter(Places.this,
-				R.layout.place, R.id.placeName, ((ApplicationRandom) getApplication()).getPlaces());
+				R.layout.place, R.id.placeName, places);
 		setListAdapter(placeListAdapter);
 	}
-
 
 	/**
 	 * On create options menu.
@@ -105,7 +109,7 @@ public class Places extends ListActivity {
 		private LayoutInflater mInflater = null;
 
 		/** The context. */
-		private Context context = null;
+		// private Context context = null;
 
 		/**
 		 * Instantiates a new home list adapter.
@@ -123,7 +127,7 @@ public class Places extends ListActivity {
 				ArrayList<Place> data) {
 			super(context, resource, resourceId, data);
 			mInflater = LayoutInflater.from(context);
-			this.context = context;
+			// this.context = context;
 
 		}
 
@@ -171,8 +175,8 @@ public class Places extends ListActivity {
 			if (position == 0) {
 				convertView = mInflater.inflate(R.layout.add, parent, false);
 				convertView = fillLayoutWithAddLayout(position, convertView);
-			}
-			else{
+
+			} else {
 				convertView = mInflater.inflate(R.layout.place, parent, false);
 				convertView = fillLayoutWithPlace(position, convertView);
 			}
@@ -194,9 +198,9 @@ public class Places extends ListActivity {
 			final Place place = (Place) this.getItem(position);
 
 			final TextView placeName = (TextView) convertView
-			.findViewById(R.id.placeName);
+					.findViewById(R.id.placeName);
 			final EditText placeWeight = (EditText) convertView
-			.findViewById(R.id.txtPlaceWeight);
+					.findViewById(R.id.txtPlaceWeight);
 
 			placeName.setText(place.getName());
 
@@ -218,11 +222,22 @@ public class Places extends ListActivity {
 				final View convertView) {
 
 			final Button addPlace = (Button) convertView
-			.findViewById(R.id.buttonAddPlace);
-			// final EditText placeName = (EditText) convertView
-			// .findViewById(R.id.placeName);
+					.findViewById(R.id.buttonAddPlace);
 
 			addPlace.setText(res.getString(R.string.button_add_place));
+
+			addPlace.setOnClickListener(new OnClickListener() {
+
+				public void onClick(View viewParam) {
+					//TODO: Verify type of data
+					((ApplicationRandom) getApplication()).savePlace(
+							((EditText) convertView
+									.findViewById(R.id.txtPlaceName)).getText().toString(),
+							((EditText) convertView
+									.findViewById(R.id.txtPlaceWeight))
+									.getText().toString());
+				}
+			});
 
 			return convertView;
 		}

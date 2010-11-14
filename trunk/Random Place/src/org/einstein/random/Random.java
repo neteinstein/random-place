@@ -36,6 +36,14 @@ public class Random extends Activity {
 		super.onStart();
 
 		setContentView(R.layout.random);
+		
+		if(!((ApplicationRandom) getApplication()).ismExternalStorageAvailable()){
+			alertDialog("External Storage Unavailable!",
+					"Please enable access to the SD Card","Done!");
+		}
+		
+		((ApplicationRandom) getApplication()).checkOrCreateDefaultFile();
+		
 	}
 
 	protected void onResume() {
@@ -50,61 +58,19 @@ public class Random extends Activity {
 
 			public void onClick(View viewParam) {
 
-				// TODO: Get the data from the database correctly
-
-				ArrayList<Place> places = null;// ((ApplicationRandom)
-				// getApplication()).getPlaces();
-
-				// DEMO CODE TO DELETE
-				places = new ArrayList<Place>();
-
-				Place demo = new Place();
-
-				demo.setName("Forum");
-				demo.setWeight(10);
-
-				places.add(demo);
-
-				demo = new Place();
-				demo.setName("Continente");
-				demo.setWeight(8);
-
-				places.add(demo);
-
-				demo = new Place();
-				demo.setName("Dolce Vita");
-				demo.setWeight(6);
-
-				places.add(demo);
-
-				demo = new Place();
-				demo.setName("Indo-paquistanês");
-				demo.setWeight(1);
-
-				places.add(demo);
-
-				// END OF DEMO CODE TO DELETE
-
-				// TODO: Instead of an alert it should change the view to show
-				// the name, picture, map...
+				ArrayList<Place> places = ((ApplicationRandom) getApplication())
+						.getPlaces("Places.xml");
 
 				if (buttonNear.isChecked()) {
-					if (buttonTweet.isEnabled()) {
-						alertDialog(
-								"Random Near Place",
-								"Sorry... Near Places and Tweetting isn't available yet!",
-								":-(");
-					} else {
-						alertDialog("Random Near Place",
-								"Sorry... Near Places isn't available yet!",
-								":-(");
-					}
-				} else {
-					// alertDialog("Random Place", "Sir, your random place: "
-					// +(randomPlace.random(places)).getName() , ":-)");
-					setPlace(randomPlace.random(places));
-				}
+					alertDialog("Random Near Place",
+							"Sorry... Near Places isn't available yet!", ":-(");
 
+				}
+				if (buttonTweet.isChecked()) {
+					alertDialog("Random Near Place",
+							"Sorry... Tweetting isn't available yet!", ":-(");
+				}
+				setPlace(randomPlace.random(places));
 			}
 		}
 
@@ -118,14 +84,14 @@ public class Random extends Activity {
 
 		ImageView placeImageView = (ImageView) findViewById(R.id.placeImage);
 
-		//TODO in the future this will load an image from the internet
-		
-		//Is the try catch necessary?
+		// TODO in the future this will load an image from the internet
+
+		// Is the try catch necessary?
 		try {
 			int id = getResources().getIdentifier(place.getImageURL(),
 					"drawable", getPackageName());
 
-			//If no image is found
+			// If no image is found
 			if (id == 0) {
 				placeImageView.setImageResource(R.drawable.place_default);
 			} else {
