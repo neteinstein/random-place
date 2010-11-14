@@ -9,7 +9,6 @@
 package org.einstein.random;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.einstein.random.entities.Place;
 
@@ -23,8 +22,8 @@ public class RandomPlace {
         for (i = 0; i < places.size(); i++) {
             totalWeight += places.get(i).getWeight();
         }
-
-        int selection = new Random().nextInt(totalWeight);
+        
+        int selection = new java.util.Random().nextInt(totalWeight);
         
         totalWeight = places.get(0).getWeight();
 
