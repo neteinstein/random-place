@@ -44,7 +44,12 @@ public class ApplicationRandom extends Application {
 		checkStorageStatus();
 
 		if (mExternalStorageAvailable) {
-
+			
+			File folder = new File(storagePath);
+			if (!f.exists() || !f.isDirectory()) {
+				folder.mkdirs();
+			} 
+			
 			File f = new File(storagePath + fileName);
 
 			BufferedReader buf = null;
