@@ -11,20 +11,20 @@
 			
 			<TextView android:id="@+id/placeName" android:text="@string/text_add_place_name"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:layout_weight="4" android:gravity="center_vertical"/>
+				android:layout_weight="1"  android:gravity="center_vertical"/>
 
 			<EditText android:id="@+id/txtPlaceName"
 				android:layout_width="fill_parent"	android:layout_height="wrap_content" 
-				android:layout_toRightOf="@id/placeName" android:layout_weight="6"/>
+				android:layout_toRightOf="@id/placeName" android:layout_weight="1" />
 
 			<TextView android:id="@+id/placeWeight" android:text="@string/text_add_place_weight"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:layout_below="@id/txtPlaceName" android:layout_weight="4" />
+				android:layout_below="@id/txtPlaceName" android:layout_weight="1" />
 
 			<EditText android:id="@+id/txtPlaceWeight"
 				android:layout_width="fill_parent"	android:layout_height="wrap_content" 
 				android:layout_toRightOf="@id/placeWeight" android:layout_below="@id/txtPlaceName"
-				android:numeric="integer" android:layout_weight="6"/>
+				android:inputType="number" android:numeric="decimal" android:layout_weight="1" />
 
 			<Button android:id="@+id/buttonAddPlace" android:paddingBottom="10px"
 				android:text="@string/button_add_place" android:gravity="center"

@@ -39,19 +39,21 @@ public class Places extends ListActivity {
 	/** The my alert dialog. */
 	private AlertDialog myAlertDialog = null;
 
+	private PlacesListAdapter placeListAdapter = null;
+	
 	protected void onStart() {
 		super.onStart();
 		this.res = getResources();
 
-		// TODO: Stupid code to be able to inflate a header on the list.
-		// This should be removed and done properly in the future.
+		// TODO: Instead of inflate the header through a hack
+		// create an xml file with it, that is inflated with the rest of the stuff
 		ArrayList<Place> places = new ArrayList<Place>();
 		places.add(null);
 
 		places.addAll(((ApplicationRandom) getApplication())
 				.getPlaces());
 
-		PlacesListAdapter placeListAdapter = new PlacesListAdapter(Places.this,
+		placeListAdapter = new PlacesListAdapter(Places.this,
 				R.layout.place, R.id.placeName, places);
 		setListAdapter(placeListAdapter);
 	}
@@ -229,13 +231,25 @@ public class Places extends ListActivity {
 			addPlace.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View viewParam) {
-					//TODO: Verify type of data
-					((ApplicationRandom) getApplication()).savePlace(
-							((EditText) convertView
-									.findViewById(R.id.txtPlaceName)).getText().toString(),
-							((EditText) convertView
-									.findViewById(R.id.txtPlaceWeight))
-									.getText().toString());
+					
+					String name = ((EditText) convertView
+							.findViewById(R.id.txtPlaceName)).getText().toString();
+							
+					Integer weight = Integer.parseInt(((EditText) convertView
+							.findViewById(R.id.txtPlaceWeight))
+							.getText().toString());
+							
+					Place place = new Place();
+					place.setName(name);
+					place.setWeight(weight);
+					
+					boolean placeSaved = ((ApplicationRandom) getApplication()).savePlace(place);
+					
+					if(placeSaved){
+						placeListAdapter.add(place);
+						placeListAdapter.notifyDataSetChanged();
+					}
+							
 				}
 			});
 
