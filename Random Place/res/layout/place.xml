@@ -12,11 +12,11 @@
 			<TextView android:id="@+id/placeName"
 				android:textSize="20sp" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:gravity="center_horizontal"
-				android:padding="10px" android:singleLine="true" android:layout_weight="8"/>
+				android:padding="10px" android:singleLine="true" android:layout_weight="1"/>
 
 			<EditText android:id="@+id/txtPlaceWeight"
 				android:layout_toRightOf="@id/placeName" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:numeric="integer" android:layout_weight="2"/> 
+				android:layout_height="wrap_content" android:numeric="integer" android:layout_weight="1"/> 
 
 		</LinearLayout>
 	</ScrollView>

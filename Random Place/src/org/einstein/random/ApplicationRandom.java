@@ -1,10 +1,11 @@
 package org.einstein.random;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -25,7 +26,8 @@ public class ApplicationRandom extends Application {
 	private String storagePath = Environment.getExternalStorageDirectory()
 			.toString() + "/randomPlace/";
 
-	//TODO: This file should be stored in preferences and checked on start if exists
+	// TODO: This file should be stored in preferences and checked on start if
+	// exists
 	private String currentFile = "Places.xml";
 
 	@Override
@@ -36,7 +38,7 @@ public class ApplicationRandom extends Application {
 	public ArrayList<Place> getPlaces() {
 		return getPlaces(currentFile);
 	}
-	
+
 	public ArrayList<Place> getPlaces(String fileName) {
 
 		ArrayList<Place> places = new ArrayList<Place>();
@@ -44,20 +46,17 @@ public class ApplicationRandom extends Application {
 		checkStorageStatus();
 
 		if (mExternalStorageAvailable) {
-			
-			File folder = new File(storagePath);
-			if (!f.exists() || !f.isDirectory()) {
-				folder.mkdirs();
-			} 
-			
-			File f = new File(storagePath + fileName);
+
+			checkOrCreateDefaultFile();
 
 			BufferedReader buf = null;
 
 			try {
 
+				File file = new File(storagePath + currentFile);
+
 				buf = new BufferedReader(new InputStreamReader(
-						new FileInputStream(f)));
+						new FileInputStream(file)));
 
 				String readString = new String();
 
@@ -86,8 +85,8 @@ public class ApplicationRandom extends Application {
 
 		} else {
 			Log.d("---SDCARD PROB --- ", "WTF?");
-		}
 
+		}
 		currentFile = fileName;
 
 		return places;
@@ -115,47 +114,44 @@ public class ApplicationRandom extends Application {
 		checkStorageStatus();
 
 		if (mExternalStorageAvailable) {
-			File f = new File(storagePath);
+			File folder = new File(storagePath);
+			if (!folder.exists() || !folder.isDirectory()) {
+				folder.mkdirs();
+			}
 
-			File[] files = f.listFiles();
+			File file = new File(storagePath + currentFile);
 
-			if (files.length < 0) {
-				if (mExternalStorageWriteable) {
-					OutputStream outStream = null;
-					File file = new File(storagePath, currentFile);
-					try {
-						outStream = new FileOutputStream(file);
-						outStream.flush();
-						outStream.close();
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-						return false;
-					} catch (IOException e) {
-						return false;
-					}
+			if (!file.exists()) {
+				FileWriter writer;
+				try {
+					writer = new FileWriter(file);
+					writer.append("");
+				} catch (IOException e) {
+					Log.d("Random Place", "Not able to write to file");
+					return false;
 				}
 			}
 		}
 		return true;
 	}
 
-	public boolean savePlace(String name, String weight) {
-		
-		//TODO Needs to append data to the current file and save it
-		
-		/*OutputStream outStream = null;
-		File file = new File(storagePath, "Places.xml");
+	public boolean savePlace(Place place) {
+
+		File file = new File(storagePath, currentFile);
 		try {
-			outStream = new FileOutputStream(file);
-			outStream.flush();
-			outStream.close();
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write(place.getName() + ";" + place.getWeight());
+			writer.newLine(); // Write system dependent end of line.
+			writer.flush();
+			writer.close();
+
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Log.d("Random Place", "savePlace failed");
 			return false;
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.d("Random Place", "savePlace failed");
 			return false;
-		}*/
+		}
 
 		return true;
 

@@ -37,12 +37,12 @@ public class Random extends Activity {
 
 		setContentView(R.layout.random);
 		
+		((ApplicationRandom) getApplication()).checkOrCreateDefaultFile();
+		
 		if(!((ApplicationRandom) getApplication()).ismExternalStorageAvailable()){
 			alertDialog("External Storage Unavailable!",
 					"Please enable access to the SD Card","Done!");
 		}
-		
-		((ApplicationRandom) getApplication()).checkOrCreateDefaultFile();
 		
 	}
 
@@ -63,14 +63,22 @@ public class Random extends Activity {
 
 				if (buttonNear.isChecked()) {
 					alertDialog("Random Near Place",
-							"Sorry... Near Places isn't available yet!", ":-(");
+							"Sorry... Near Places isn't available yet!", "Proceed");
 
 				}
 				if (buttonTweet.isChecked()) {
 					alertDialog("Random Near Place",
-							"Sorry... Tweetting isn't available yet!", ":-(");
+							"Sorry... Tweetting isn't available yet!", "Proceed");
 				}
-				setPlace(randomPlace.random(places));
+				
+				if(places != null && places.size() > 0){
+					setPlace(randomPlace.random(places));
+				}
+				else{
+					alertDialog("Random Place",
+							"Hey...don't be lame, add a place first!", "Proceed");
+				}
+				
 			}
 		}
 
