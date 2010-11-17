@@ -18,6 +18,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.HTTP;
 
+import android.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,8 +27,8 @@ import android.util.Log;
 
 public class Twitter extends Activity {
 
-	private String CONSUMER_KEY = "";
-	private String CONSUMER_SECRET = "";
+	private String CONSUMER_KEY = null;
+	private String CONSUMER_SECRET = null;
 	private String CALLBACK_URL = "random://twitter";
 	private OAuthProvider provider = null;
 	private boolean firstTime = false;
@@ -35,6 +36,9 @@ public class Twitter extends Activity {
 	public void onStart() {
 		super.onStart();
 
+		this.CONSUMER_KEY = getResources().getString(R.string.consumer_key);
+		this.CONSUMER_KEY = getResources().getString(R.string.consumer_secret);
+		
 		/*if (firstTime) {
 			CommonsHttpOAuthConsumer consumer = new CommonsHttpOAuthConsumer(
 					CONSUMER_KEY, CONSUMER_SECRET, Signature.HMAC_SHA1);

@@ -41,6 +41,8 @@ public final class R {
         public static final int app_name=0x7f040000;
         public static final int button_add_place=0x7f040012;
         public static final int button_random=0x7f040001;
+        public static final int consumer_key=0x7f040014;
+        public static final int consumer_secret=0x7f040015;
         public static final int error=0x7f040004;
         public static final int info=0x7f040002;
         public static final int loading_data=0x7f040006;
