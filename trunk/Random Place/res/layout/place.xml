@@ -2,21 +2,26 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
-	
+
 	<ScrollView android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		
+
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_width="fill_parent" android:layout_height="wrap_content">
-			
-			<TextView android:id="@+id/placeName"
-				android:textSize="20sp" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:gravity="center_horizontal"
-				android:padding="10px" android:singleLine="true" android:layout_weight="1"/>
 
-			<EditText android:id="@+id/txtPlaceWeight"
+			<TextView android:id="@+id/placeName" android:textSize="20sp"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:gravity="center_horizontal" android:padding="10px"
+				android:singleLine="true" android:layout_weight="1" />
+
+			<TextView android:id="@+id/placeWeight"
 				android:layout_toRightOf="@id/placeName" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:numeric="integer" android:layout_weight="1"/> 
+				android:layout_height="wrap_content" android:numeric="integer"
+				android:layout_weight="1" />
+
+			<Button android:id="@+id/deletePlace" 
+				android:layout_toRightOf="@id/placeWeight" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_weight="1"/>
 
 		</LinearLayout>
 	</ScrollView>
