@@ -139,9 +139,38 @@ public class ApplicationRandom extends Application {
 
 		File file = new File(storagePath, currentFile);
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file,
+					true));
 			writer.write(place.getName() + ";" + place.getWeight());
 			writer.newLine(); // Write system dependent end of line.
+			writer.flush();
+			writer.close();
+
+		} catch (FileNotFoundException e) {
+			Log.d("Random Place", "savePlace failed");
+			return false;
+		} catch (IOException e) {
+			Log.d("Random Place", "savePlace failed");
+			return false;
+		}
+
+		return true;
+
+	}
+
+	public boolean savePlaces(ArrayList<Place> places) {
+
+		File file = new File(storagePath, currentFile);
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file,
+					true));
+			for (int i = 0; i < places.size(); i++) {
+				Place place = places.get(i);
+				if (place != null) {
+					writer.write(place.getName() + ";" + place.getWeight());
+					writer.newLine(); // Write system dependent end of line.
+				}
+			}
 			writer.flush();
 			writer.close();
 

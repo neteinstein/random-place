@@ -21,11 +21,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Places extends ListActivity {
@@ -39,22 +40,24 @@ public class Places extends ListActivity {
 	/** The my alert dialog. */
 	private AlertDialog myAlertDialog = null;
 
+	private ArrayList<Place> places = null;
+
 	private PlacesListAdapter placeListAdapter = null;
-	
+
 	protected void onStart() {
 		super.onStart();
 		this.res = getResources();
 
 		// TODO: Instead of inflate the header through a hack
-		// create an xml file with it, that is inflated with the rest of the stuff
-		ArrayList<Place> places = new ArrayList<Place>();
+		// create an xml file with it, that is inflated with the rest of the
+		// stuff
+		places = new ArrayList<Place>();
 		places.add(null);
 
-		places.addAll(((ApplicationRandom) getApplication())
-				.getPlaces());
+		places.addAll(((ApplicationRandom) getApplication()).getPlaces());
 
-		placeListAdapter = new PlacesListAdapter(Places.this,
-				R.layout.place, R.id.placeName, places);
+		placeListAdapter = new PlacesListAdapter(Places.this, R.layout.place,
+				R.id.placeName, places);
 		setListAdapter(placeListAdapter);
 	}
 
@@ -201,12 +204,49 @@ public class Places extends ListActivity {
 
 			final TextView placeName = (TextView) convertView
 					.findViewById(R.id.placeName);
-			final EditText placeWeight = (EditText) convertView
-					.findViewById(R.id.txtPlaceWeight);
-
+			final TextView placeWeight = (TextView) convertView
+					.findViewById(R.id.placeWeight);
+			final Button deletePlace = (Button) convertView
+			.findViewById(R.id.deletePlace);
+			
 			placeName.setText(place.getName());
 
 			placeWeight.setText(place.getWeightString());
+
+			deletePlace.setText("Delete");
+
+
+			// TODO: This should be added, the position should be detected onClick...
+			deletePlace.setTag(position);
+
+			deletePlace.setOnClickListener(new OnClickListener() {
+
+				public void onClick(View view) {
+					// TODO: This code should be optimized... 
+					int position = Integer.parseInt(deletePlace.getTag()
+							.toString());
+
+					Place removed = places.remove(position);
+					
+					boolean placeDeleted = ((ApplicationRandom) getApplication())
+							.savePlaces(places);
+
+					if (placeDeleted) {
+						placeListAdapter.remove(removed);
+						placeListAdapter.notifyDataSetChanged();
+					}else{
+						places.add(removed);
+					}
+
+					/* IF remove above doesnt work... use this for now
+					 * placeListAdapter.clear(); for(int
+					 * i=0;i<places.size();i++){
+					 * placeListAdapter.add(places.get(i));
+					 * placeListAdapter.notifyDataSetChanged(); }
+					 */
+
+				}
+			});
 
 			return convertView;
 		}
@@ -231,25 +271,27 @@ public class Places extends ListActivity {
 			addPlace.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View viewParam) {
-					
+
 					String name = ((EditText) convertView
-							.findViewById(R.id.txtPlaceName)).getText().toString();
-							
+							.findViewById(R.id.txtPlaceName)).getText()
+							.toString();
+
 					Integer weight = Integer.parseInt(((EditText) convertView
-							.findViewById(R.id.txtPlaceWeight))
-							.getText().toString());
-							
+							.findViewById(R.id.txtPlaceWeight)).getText()
+							.toString());
+
 					Place place = new Place();
 					place.setName(name);
 					place.setWeight(weight);
-					
-					boolean placeSaved = ((ApplicationRandom) getApplication()).savePlace(place);
-					
-					if(placeSaved){
+
+					boolean placeSaved = ((ApplicationRandom) getApplication())
+							.savePlace(place);
+
+					if (placeSaved) {
 						placeListAdapter.add(place);
 						placeListAdapter.notifyDataSetChanged();
 					}
-							
+
 				}
 			});
 
