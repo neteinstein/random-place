@@ -25,6 +25,6 @@
 	<string name="button_add_place">Add Place</string>
 	
 	
-	<string name="places_team">Pedro Vicente</string>
+	<string name="places_team">Original Code: Pedro Vicente; Bugfixes: Rui Macedo + Miguel Almeida</string>
 
 </resources>
