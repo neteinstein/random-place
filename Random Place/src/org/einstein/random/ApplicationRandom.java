@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import org.einstein.random.entities.Place;
+import org.einstein.random.twitter.Twitter;
 
 import android.app.Application;
 import android.os.Environment;
@@ -25,6 +26,8 @@ public class ApplicationRandom extends Application {
 	private boolean mExternalStorageWriteable = false;
 	private String storagePath = Environment.getExternalStorageDirectory()
 			.toString() + "/randomPlace/";
+	
+	private Twitter twitter = new Twitter(getResources().getString(R.string.consumer_key), getResources().getString(R.string.consumer_secret));
 
 	// TODO: This file should be stored in preferences and checked on start if
 	// exists
@@ -200,6 +203,14 @@ public class ApplicationRandom extends Application {
 
 	public void setmExternalStorageWriteable(boolean mExternalStorageWriteable) {
 		this.mExternalStorageWriteable = mExternalStorageWriteable;
+	}
+
+	public void setTwitter(Twitter twitter) {
+		this.twitter = twitter;
+	}
+
+	public Twitter getTwitter() {
+		return twitter;
 	}
 
 }
