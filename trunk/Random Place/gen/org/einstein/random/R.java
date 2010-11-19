@@ -18,16 +18,17 @@ public final class R {
         public static final int place_default=0x7f020004;
     }
     public static final class id {
-        public static final int add=0x7f05000b;
+        public static final int add=0x7f05000c;
         public static final int buttonAddPlace=0x7f050004;
-        public static final int buttonNear=0x7f050007;
-        public static final int buttonRandom=0x7f050009;
-        public static final int buttonTweet=0x7f050008;
-        public static final int logo=0x7f050006;
-        public static final int placeImage=0x7f050005;
+        public static final int buttonNear=0x7f050008;
+        public static final int buttonRandom=0x7f05000a;
+        public static final int buttonTweet=0x7f050009;
+        public static final int deletePlace=0x7f050005;
+        public static final int logo=0x7f050007;
+        public static final int placeImage=0x7f050006;
         public static final int placeName=0x7f050000;
         public static final int placeWeight=0x7f050002;
-        public static final int randomPlace=0x7f05000a;
+        public static final int randomPlace=0x7f05000b;
         public static final int txtPlaceName=0x7f050001;
         public static final int txtPlaceWeight=0x7f050003;
     }

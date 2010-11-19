@@ -15,9 +15,9 @@ import org.einstein.random.entities.Place;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -28,6 +28,7 @@ import android.widget.ToggleButton;
 public class Random extends Activity {
 
 	private RandomPlace randomPlace = new RandomPlace();
+	private final String PREFS_NAME = "randomPreferences";
 
 	/** The my alert dialog. */
 	private AlertDialog myAlertDialog = null;
@@ -36,14 +37,27 @@ public class Random extends Activity {
 		super.onStart();
 
 		setContentView(R.layout.random);
-		
+
 		((ApplicationRandom) getApplication()).checkOrCreateDefaultFile();
-		
-		if(!((ApplicationRandom) getApplication()).ismExternalStorageAvailable()){
+
+		//The shared preferences should be placed in the application so that is a common method to all the activities
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+
+		if (!((ApplicationRandom) getApplication())
+				.ismExternalStorageAvailable()) {
 			alertDialog("External Storage Unavailable!",
-					"Please enable access to the SD Card","Done!");
+					"Please enable access to the SD Card", "Done!");
+		} else {
+
+			boolean isFirstRun = settings.getBoolean("isFirstRun", true);
+			if (isFirstRun) {
+				// getApplication().getT authorize();
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putBoolean("isFirstRun", false);
+			}
+
 		}
-		
+
 	}
 
 	protected void onResume() {
@@ -63,22 +77,30 @@ public class Random extends Activity {
 
 				if (buttonNear.isChecked()) {
 					alertDialog("Random Near Place",
-							"Sorry... Near Places isn't available yet!", "Proceed");
+							"Sorry... Near Places isn't available yet!",
+							"Proceed");
 
 				}
-				if (buttonTweet.isChecked()) {
-					alertDialog("Random Near Place",
-							"Sorry... Tweetting isn't available yet!", "Proceed");
-				}
-				
-				if(places != null && places.size() > 0){
-					setPlace(randomPlace.random(places));
-				}
-				else{
+
+				if (places != null && places.size() > 0) {
+					Place random = randomPlace.random(places);
+					setPlace(random);
+					
+					SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+					String accessToken = settings.getString("consumerToken", null);
+					
+					if (buttonTweet.isChecked() && accessToken != null) {
+						((ApplicationRandom)getApplication()).getTwitter().postOnTwitter("Goin' to " + random.getName());
+					}
+					
+				} else {
 					alertDialog("Random Place",
-							"Hey...don't be lame, add a place first!", "Proceed");
+							"Hey...don't be lame, add a place first!",
+							"Proceed");
 				}
 				
+				
+
 			}
 		}
 
