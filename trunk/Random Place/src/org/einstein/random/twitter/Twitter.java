@@ -127,8 +127,6 @@ public class Twitter extends Activity {
 			// 'status' here is the update value you collect from UI
 			nvps.add(new BasicNameValuePair("status", message));
 			post.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-			// set this to avoid 417 error (Expectation Failed)
-			post.getParams().setBooleanParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
 			// sign post
 			this.consumer.sign(post);
 			
